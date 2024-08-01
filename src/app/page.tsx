@@ -1,51 +1,100 @@
-"use client"
-import { useState, useEffect, useContext } from "react";
-import { useRouter } from "next/navigation";
- 
+'use client';
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { useSession } from 'next-auth/react';
+import { redirect } from 'next/navigation';
+
 const Home = () => {
-  const [usuario, setusuario] = useState("");
-  const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [videoUrl, setVideoUrl] = useState("");
+
+  const { data: session, status } = useSession()
+
+  if (status === "authenticated") {
+    redirect('/landing');
+  }
+
   const router = useRouter();
- 
+
+  const handleSignup = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    router.push('/signup');
+  }
 
   return (
-    <main className="relative w-full h-screen bg-black">
-      <div className="absolute inset-0 flex flex-col justify-center items-center text-center bg-gray-800 bg-opacity-60">
-        <div className="  w-50vw   ">
-          <div className="flex flex-col items-center items-center h-screen align-center justify-center px-24">
-            <h2 className="text-4xl text-white pb-10">Iniciar Sesión</h2>
+    <div className='relative'>
+  
+    <div className=" md:mx-56 md:px-56">
 
-            <form  >
-              <div className="mb-4">
+    <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8  h-screen md:mx-24 bg-zinc-900 bg-opacity-30">
+        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+      
+          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-white">
+            Iniciar Sesión / log in
+          </h2>
+        </div>
+
+        <form className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm"
+        onSubmit={(e) => {
+          e.preventDefault();
+          signIn('credentials', { email, password, redirect: true, callbackUrl: '/dashboard' });
+      }}>
+          <div className="space-y-6">
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium leading-6 text-white">
+                email
+              </label>
+              <div className="mt-2">
                 <input
-                  className="w-full px-4 py-2 border rounded-md text-center font-arial"
-                  type="usuario"
-                  value={usuario}
-                  onChange={(e) => setusuario(e.target.value)}
+                  id="email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className="pl-2 block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-blue-500 sm:text-sm sm:leading-6"
                 />
               </div>
+            </div>
 
-              <div className="mb-6">
+            <div>
+              <div className="flex items-center justify-between">
+                <label htmlFor="password" className="block text-sm font-medium leading-6 text-white">
+                  Contraseña ( password)
+                </label>
+             
+              </div>
+              <div className="mt-2">
                 <input
-                  className="w-full px-4 py-2 border rounded-md text-center font-cinzel"
+                  id="password"
+                  name="password"
                   type="password"
-                  value={password}
+                  autoComplete="current-password"
                   onChange={(e) => setPassword(e.target.value)}
+                  required
+                  className="pl-2 block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-blue-500 sm:text-sm sm:leading-6"
                 />
-                {errorMessage && <p>{errorMessage}</p>}
               </div>
+            </div>
 
+            <div>
               <button
-                className="mt-8 bg-white text-gray-800 rounded-full py-2 px-4 border-b-2 border-gray-500 hover:bg-gray-600 hover:text-white"
-               >
+                onClick={() => signIn('credentials', { email, password, redirect: true, callbackUrl: '/dashboard' })}
+                disabled={!email || !password}
+                className="disabled:opacity-40 flex w-full justify-center rounded-md bg-blue-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
+              >
                 Iniciar sesión
               </button>
-            </form>
+            </div>
           </div>
-        </div>
+
+        </form>
+      
       </div>
-    </main>
+    </div>
+  </div>
   );
 };
 
