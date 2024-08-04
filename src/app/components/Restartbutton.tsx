@@ -9,8 +9,8 @@ const RestartButton: React.FC = () => {
   };
 
   return (
-    <button className="mx-auto " onClick={handleClick}>
-      <div className='p-5 text-lg bg-transparent text-gray-600 rounded-lg border border-gray-600 shadow-lg'>
+    <button className="mx-auto" onClick={handleClick}>
+      <div className="p-5 text-lg bg-transparent text-gray-600 rounded-lg border border-gray-600 shadow-lg">
         <MdRefresh size={40} style={{ transform: 'scaleX(-1)' }} />
       </div>
     </button>

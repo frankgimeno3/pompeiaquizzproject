@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useSpring, animated } from "react-spring";
-import Restartbutton from "./../../Restartbutton";
 
 interface AleaProps {
   setComponenteActual: React.Dispatch<React.SetStateAction<string>>;

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Restartbutton from "./../../Restartbutton";
 
 interface ResolutividadProps {
   setComponenteActual: React.Dispatch<React.SetStateAction<string>>;

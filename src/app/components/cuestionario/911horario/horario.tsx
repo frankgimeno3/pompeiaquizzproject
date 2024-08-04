@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Restartbutton from "./../../Restartbutton";
 
 interface HorarioProps {
   setComponenteActual: React.Dispatch<React.SetStateAction<string>>;

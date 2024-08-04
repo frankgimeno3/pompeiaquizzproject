@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import Restartbutton from "./../../Restartbutton";
 
 interface EnviarProps {
   setComponenteActual: React.Dispatch<React.SetStateAction<string>>;

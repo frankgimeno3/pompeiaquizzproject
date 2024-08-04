@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Restartbutton from "./../../Restartbutton";
 
 interface TrabajoProps {
   setComponenteActual: React.Dispatch<React.SetStateAction<string>>;

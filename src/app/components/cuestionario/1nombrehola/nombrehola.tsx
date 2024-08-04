@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Image from "next/image";
-import Restartbutton from "./../../Restartbutton";
 
 interface NombreholaProps {
   setComponenteActual: React.Dispatch<React.SetStateAction<string>>;
