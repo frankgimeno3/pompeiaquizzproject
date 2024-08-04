@@ -6,6 +6,7 @@ import Restartbutton from "../../components/Restartbutton";
 import renderComponenteActual from "../renderComponenteActual";
 
 const Cuestionario = () => {
+  const [idioma, setIdioma] = useState("es")
   const [componenteactual, setComponenteActual] = useState("nombre");
   const [nombre, setNombre] = useState("");
   const [conflicto, setConflicto] = useState("");
